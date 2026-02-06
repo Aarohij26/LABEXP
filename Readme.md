@@ -2,35 +2,34 @@ Download Virtual Box from [here](https://www.virtualbox.org/wiki/Downloads)
 
 
 Download Vagrant from [here](https://developer.hashicorp.com/vagrant/install)
-![Download Vagrant](./Images/I1.png)
+![Download Vagrant](Experiment1/Images/I1.jpeg)
 
 
 To verify the installation we will check the version via following command
 ``` bash
 vagrant --version
 ```
-![Version Check](./Images/2.png)
+![Version Check](./Experiment1/Images/I2.jpeg)
 
 
 Initialize Vagrant with Ubuntu box:
 ```bash
 vagrant init hashicorp/bionic64
 ```
-![Initialize](./Images/3.png)
-
+![Initialize](./Experiment1/Images/I3.png)
 
 Start the VM:
    ```bash
    vagrant up
    ```
-![Vagrant up](./Images/4.png)
+![Vagrant up](./Experiment1/Images/I4.png)
 
 
 Access the VM:
 ```bash
 vagrant ssh
 ```
-![ssh](./Images/5.png)
+![ssh](./Experiment1/Images/I5.png)
 
 
 Step 4: Install Nginx inside VM
