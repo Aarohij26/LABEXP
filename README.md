@@ -22,6 +22,6 @@ Includes detailed laboratory experiments performed to reinforce theoretical know
   👉 [View Experiment 1](./Experiment1)
 
 - **Experiment 2:** Docker Installation, Configuration, and Running Images  
-  👉 [View Experiment 2](./Experiment)
+  👉 [View Experiment 2](./Experiment2)
 
 ---
