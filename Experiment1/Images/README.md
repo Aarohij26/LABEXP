@@ -1,7 +1,7 @@
-Step 1:Download Virtual Box from [here](https://www.virtualbox.org/wiki/Downloads)
+Step 1: Download Virtual Box from [here](https://www.virtualbox.org/wiki/Downloads)
 
 
-Step 2:Download Vagrant from [here](https://developer.hashicorp.com/vagrant/install)
+Step 2: Download Vagrant from [here](https://developer.hashicorp.com/vagrant/install)
 ![Download Vagrant](Experiment1/Images/I1.jpeg)
 
 
@@ -18,8 +18,7 @@ vagrant init hashicorp/bionic64
 ```
 ![Initialize](./Experiment1/Images/I3.png)
 
-
-Step 5: Start the VM:
+Step 5:Start the VM:
    ```bash
    vagrant up
    ```
@@ -41,13 +40,11 @@ sudo systemctl start nginx
 ```
 ![Install Nginx](./Experiment1/Images/I6.png)
 
-
 Step 8: Verify Nginx
 ```bash
 curl localhost
 ``` 
 ![Verify Nginx](./Experiment1/Images/I7.jpeg)
-
 
 Step 9: Utilization Matrix In Running State
 ![Running State Matrix](./Experiment1/Images/I8.png)
@@ -67,7 +64,6 @@ Step 12:Remove VM
 vagrant destroy
 ```
 ![Vagrant Deleted](./Experiment1/Images/I9.jpeg)
-
 
 
 
