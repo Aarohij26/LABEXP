@@ -15,7 +15,7 @@ apt update
 apt install -y openjdk-17-jdk
 javac --version
 ```
-![install java](/Classwork/2_Container_Persistence/Images/image2.png)
+![install java](/Classwork/2_Container_persistence/Images/image2.png)
 
 ## 3️⃣ Create Java Program
 ```bash
@@ -38,20 +38,20 @@ Compile & Run:
 javac Hello.java
 java Hello
 ```
-![java program](/Classwork/2_Container_Persistence/Images/image3.png)
+![java program](/Classwork/2_Container_persistence/Images/image3.png)
 
 ## 4️⃣ Exit Container
 ```bash
 exit
 ```
-![exit](/Classwork/2_Container_Persistence/Images/image4.png)
+![exit](/Classwork/2_Container_persistence/Images/image4.png)
 
 ## 5️⃣ Commit Container to Image
 ```bash
 docker commit java_lab myrepo/java-app:1.0
 docker images
 ```
-![commit](/Classwork/2_Container_Persistence/Images/image5.png)
+![commit](/Classwork/2_Container_persistence/Images/image5.png)
 
 ## 6️⃣ Reuse Image
 ```bash
@@ -59,21 +59,21 @@ docker run -it myrepo/java-app:1.0 bash
 cd /home/app
 java Hello
 ```
-![reuse](/Classwork/2_Container_Persistence/Images/image6.png)
+![reuse](/Classwork/2_Container_persistence/Images/image6.png)
 
 ## 7️⃣ Save and Load Image
 ```bash
 docker save -o java-app.tar myrepo/java-app:1.0
 docker load -i java-app.tar
 ```
-![save load](/Classwork/2_Container_Persistence/Images/image7.png)
+![save load](/Classwork/2_Container_persistence/Images/image7.png)
 
 ## 8️⃣ Export vs Save
 ```bash
 docker export java_lab > container.tar
 docker save -o image.tar myrepo/java-app:1.0
 ```
-![export vs save](/Classwork/2_Container_Persistence/Images/image8.png)
+![export vs save](/Classwork/2_Container_persistence/Images/image8.png)
 
 ## 🔑 Key Concepts
 - Container → Running environment  
