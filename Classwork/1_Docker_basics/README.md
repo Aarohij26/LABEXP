@@ -6,13 +6,13 @@
 docker version
 ```
 
-![docker version](/Classwork/Docker_basics/Images/image1.png)
+![docker version](/Classwork/1_Docker_basics/Images/image1.png)
 
 ```bash
 docker info
 ```
 
-![docker info](/Classwork/Docker_basics/Images/image2.png)
+![docker info](/Classwork/1_Docker_basics/Images/image2.png)
 
 ## 2. Image Management
 
@@ -20,20 +20,20 @@ docker info
 docker images
 ```
 
-![docker images](/Classwork/Docker_basics/Images/image3.png)
+![docker images](/Classwork/1_Docker_basics/Images/image3.png)
 
 ```bash
 docker pull ubuntu
 docker pull ubuntu:22.04
 ```
 
-![docker pull](/Classwork/Docker_basics/Images/image4.png)
+![docker pull](/Classwork/1_Docker_basics/Images/image4.png)
 
 ```bash
 docker rmi ubuntu
 ```
 
-![docker rmi](/Classwork/Docker_basics/Images/image5.png)
+![docker rmi](/Classwork/1_Docker_basics/Images/image5.png)
 
 ## 3. Container Lifecycle
 
@@ -41,13 +41,13 @@ docker rmi ubuntu
 docker run -it --name test ubuntu bash
 ```
 
-![docker run](/Classwork/Docker_basics/Images/image6.png)
+![docker run](/Classwork/1_Docker_basics/Images/image6.png)
 
 ```bash
 docker ps
 ```
 
-![docker ps](/Classwork/Docker_basics/Images/image7.png)
+![docker ps](/Classwork/1_Docker_basics/Images/image7.png)
 
 ```bash
 docker start test
@@ -55,7 +55,7 @@ docker stop test
 docker restart test
 ```
 
-![docker lifecycle](/Classwork/Docker_basics/Images/image8.png)
+![docker lifecycle](/1_Classwork/Docker_basics/Images/image8.png)
 
 ```bash
 docker rm test
