@@ -6,13 +6,13 @@
 docker version
 ```
 
-![docker version](images/docker-version.png)
+![docker version](images/image1.png)
 
 ```bash
 docker info
 ```
 
-![docker info](images/docker-info.png)
+![docker info](images/image2.png)
 
 ## 2. Image Management
 
@@ -20,20 +20,20 @@ docker info
 docker images
 ```
 
-![docker images](images/docker-images.png)
+![docker images](images/image3.png)
 
 ```bash
 docker pull ubuntu
 docker pull ubuntu:22.04
 ```
 
-![docker pull](images/docker-pull.png)
+![docker pull](images/image4.png)
 
 ```bash
 docker rmi ubuntu
 ```
 
-![docker rmi](images/docker-rmi.png)
+![docker rmi](images/image5.png)
 
 ## 3. Container Lifecycle
 
