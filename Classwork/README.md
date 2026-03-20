@@ -17,12 +17,12 @@ This repository contains all in-class hands-on exercises performed during the **
 ## 📂 Classwork Sections
 
 ### 🔹 Docker Basics  
-👉 [View Docker Basics Work](./1_Docker_basics)
+👉 [View: 1.Docker Basics](./1_Docker_basics)
 
 ---
 
 ### 🔹 Container Persistence  
-👉 [View Container Persistence Work](./2_Container_persistence)
+👉 [View: 2.Container Persistence](./2_Container_persistence)
 
 ---
 
