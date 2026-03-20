@@ -7,7 +7,7 @@ Understand how to preserve container changes using Docker commands and best prac
 ```bash
 docker run -it --name java_lab ubuntu:22.04 bash
 ```
-![run container](/Classwork/2_Container_Persistence/Images/image1.png)
+![run container](/Classwork/2_Container_persistence/Images/image1.png)
 
 ## 2️⃣ Install Java
 ```bash
