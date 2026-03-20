@@ -36,7 +36,7 @@ This section contains theoretical and implementation-based assignments related t
 
 | Assignment No. | Topic | Description |
 |:--------------:|:------|:------------|
-| [Assignment 1](./Assignment/project) | Docker & Microservices | Covers Dockerfile creation, Docker Compose, and architecture comparison |
+| [Assignment 1](./Assignment/Assignment_1) | Docker & Microservices | Covers Dockerfile creation, Docker Compose, and architecture comparison |
 
 ---
 
