@@ -1,33 +1,37 @@
-# 📌 Classwork Hands-On
+# 🐳 Classwork Hands-On
 
----
 
 ## 📖 Overview
-This section contains in-class exercises and practice tasks performed during the **Containerization & DevOps Lab**.
+This repository contains all in-class hands-on exercises performed during the **Containerization & DevOps Lab**.
 
 ---
 
-## 🎯 Objective
-- Understand core DevOps concepts  
-- Practice Docker commands and workflows  
-- Gain hands-on experience with containerization  
+## 🎯 Objectives
+- Understand core DevOps and containerization concepts  
+- Practice Docker commands  
+- Work with images and containers  
+- Learn container persistence  
 
 ---
 
-## 📂 Contents
-- Basic Docker commands  
-- Image pulling and running containers  
-- Container lifecycle management  
-- Small demo tasks and experiments  
+## 📂 Classwork Sections
+
+### 🔹 Docker Basics  
+👉 [View Docker Basics Work](./1_Docker_basics)
+
+---
+
+### 🔹 Container Persistence  
+👉 [View Container Persistence Work](./2_Container_persistence)
 
 ---
 
 ## 🛠️ Tools Used
 - Docker  
-- Linux Commands  
-- Git  
+- Linux (Ubuntu)  
+- Git & GitHub  
 
 ---
 
 ## 📌 Note
-These are guided exercises done during class to build foundational understanding.
+These are guided lab exercises to build foundational understanding of Docker and DevOps workflows.
