@@ -75,22 +75,6 @@ docker save -o image.tar myrepo/java-app:1.0
 ```
 ![export vs save](/Classwork/2_Container_Persistence/Images/image8.png)
 
-## 9️⃣ Dockerfile (Best Practice)
-```dockerfile
-FROM ubuntu:22.04
-RUN apt update && apt install -y openjdk-17-jdk
-WORKDIR /home/app
-COPY Hello.java .
-RUN javac Hello.java
-CMD ["java", "Hello"]
-```
-
-Build Image:
-```bash
-docker build -t java-app:2.0 .
-```
-![dockerfile](/Classwork/2_Container_Persistence/Images/image9.png)
-
 ## 🔑 Key Concepts
 - Container → Running environment  
 - Image → Snapshot of container  
