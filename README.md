@@ -16,10 +16,11 @@ The objective of this lab is to understand containerization concepts, Docker fun
 
 ## 📌 Classwork Hands-On
 
-Contains guided in-class exercises, demonstrations, and practice tasks aimed at strengthening conceptual understanding.
+The table below provides an overview of the classwork exercises:
 
-👉 [Explore Classwork Hands-On](./Classwork)
-
+Classwork No.	Title	Result
+Classwork 102
+	Docker Basics	Understood fundamental Docker commands, image handling, and basic container operations
 ---
 
 ## 🧪 Lab Experiments
