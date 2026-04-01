@@ -36,7 +36,7 @@ docker network create \
   macvlan_net
 ```
 
-[Network](./Images/image1.png)
+![Network](./Images/image1.png)
 
 ---
 
@@ -46,7 +46,7 @@ docker network create \
 docker network inspect macvlan_net
 ```
 
-[Inspect](./Images/image1.png)
+![Inspect](./Images/image1.png)
 
 ---
 
@@ -56,7 +56,7 @@ docker network inspect macvlan_net
 cp .env .env.local
 ```
 
-[Environment](./Images/image3.png)
+![Environment](./Images/image3.png)
 
 ---
 
@@ -66,13 +66,13 @@ cp .env .env.local
 docker compose up --build -d
 ```
 
-[Build](./Images/image4.png)
+![Build](./Images/image4.png)
 
 ```bash
 docker compose ps
 ```
 
-[Compose](./Images/image5.png)
+![Compose](./Images/image5.png)
 
 ---
 
@@ -84,7 +84,7 @@ docker compose ps
 curl http://192.168.1.100:8000/health
 ```
 
-[Health](./Images/image6.png)
+![Health](./Images/image6.png)
 
 ### Insert Record
 
@@ -94,7 +94,7 @@ curl -X POST http://192.168.1.100:8000/records \
   -d '{"name": "Alice", "value": "Hello"}'
 ```
 
-[Record](./Images/image7.png)
+![Record](./Images/image7.png)
 
 ### Fetch Records
 
@@ -109,7 +109,7 @@ docker compose down
 docker compose up -d
 ```
 
-[Persistence](./Images/image8.png)
+![Persistence](./Images/image8.png)
 
 ---
 
@@ -119,7 +119,7 @@ docker compose up -d
 sudo ip link add macvlan_host link eth0 type macvlan mode bridge
 ```
 
-[fix](./Images/image9.png)
+![fix](./Images/image9.png)
 
 ---
 
@@ -129,7 +129,7 @@ sudo ip link add macvlan_host link eth0 type macvlan mode bridge
 docker images
 ```
 
-[Images](./Images/image11.png)
+![Images](./Images/image11.png)
 
 ---
 ## Useful Commands
@@ -139,14 +139,14 @@ docker images
 docker compose logs -f backend
 docker compose logs -f db
 ```
-[Logs](./Images/image10.png)
+![Logs](./Images/image10.png)
 
 ---
 # Inspect container IPs
 docker inspect project_backend | grep IPAddress
 docker inspect project_db | grep IPAddress
 
-[IPs](./Images/image12.png)
+![IPs](./Images/image12.png)
 ```
 ---
 
@@ -157,7 +157,7 @@ After building, compare image sizes:
 ```bash
 docker images | grep project
 ```
-[Images](./Images/image13.png)
+![Images](./Images/image13.png)
 
 Expected approximate sizes (multi-stage build benefit):
 
