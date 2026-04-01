@@ -139,14 +139,14 @@ docker images
 docker compose logs -f backend
 docker compose logs -f db
 ```
-[Images](./Images/image10.png)
+[Logs](./Images/image10.png)
 
-
+---
 # Inspect container IPs
 docker inspect project_backend | grep IPAddress
 docker inspect project_db | grep IPAddress
 
-[Images](./Images/image12.png)
+[IPs](./Images/image12.png)
 
 # Check network
 docker network inspect macvlan_net
