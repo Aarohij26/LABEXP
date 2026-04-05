@@ -10,6 +10,9 @@ This experiment demonstrates Docker basics: containerizing apps, building images
 mkdir my-flask-app
 cd my-flask-app
 
+📸 Screenshot:
+(Add screenshot here)
+
 app.py
 from flask import Flask
 app = Flask(__name__)
@@ -37,6 +40,9 @@ COPY app.py .
 EXPOSE 5000
 CMD ["python", "app.py"]
 
+📸 Screenshot:
+(Add Dockerfile screenshot)
+
 --------------------------------------------------
 
 ## 🚫 Part 2: .dockerignore
@@ -51,6 +57,9 @@ venv/
 *.log
 tests/
 
+📸 Screenshot:
+(Add .dockerignore screenshot)
+
 Why:
 - Reduces image size
 - Faster builds
@@ -61,23 +70,57 @@ Why:
 ## 🏗️ Part 3: Build Images
 
 docker build -t my-flask-app .
+
+📸 Screenshot:
+(Add build output screenshot)
+
 docker build -t my-flask-app:1.0 .
+
+📸 Screenshot:
+(Add version build screenshot)
+
 docker build -t my-flask-app:latest -t my-flask-app:1.0 .
+
+📸 Screenshot:
+(Add multi-tag screenshot)
+
 docker images
+
+📸 Screenshot:
+(Add image list screenshot)
 
 --------------------------------------------------
 
 ## ▶️ Part 4: Run Containers
 
 docker run -d -p 5000:5000 --name flask-container my-flask-app
+
+📸 Screenshot:
+(Add running container screenshot)
+
 curl http://localhost:5000
+
+📸 Screenshot:
+(Add browser/curl output)
+
 docker logs flask-container
 
-Manage:
-docker stop flask-container
-docker start flask-container
-docker rm flask-container
-docker rm -f flask-container
+📸 Screenshot:
+(Add logs screenshot)
+
+### Manage
+
+docker stop flask-container  
+📸 Screenshot:
+
+docker start flask-container  
+📸 Screenshot:
+
+docker rm flask-container  
+📸 Screenshot:
+
+docker rm -f flask-container  
+📸 Screenshot:
 
 --------------------------------------------------
 
@@ -100,68 +143,108 @@ USER appuser
 EXPOSE 5000
 CMD ["python", "app.py"]
 
+📸 Screenshot:
+(Add multi-stage Dockerfile screenshot)
+
 Build:
+
 docker build -t flask-regular .
+📸 Screenshot:
+
 docker build -f Dockerfile.multistage -t flask-multistage .
+📸 Screenshot:
+
 docker images | grep flask
+📸 Screenshot:
 
 --------------------------------------------------
 
 ## ☁️ Part 6: Docker Hub
 
 docker login
+📸 Screenshot:
+
 docker tag my-flask-app username/my-flask-app:1.0
+📸 Screenshot:
+
 docker push username/my-flask-app:1.0
+📸 Screenshot:
 
 Pull:
+
 docker pull username/my-flask-app:latest
+📸 Screenshot:
+
 docker run -d -p 5000:5000 username/my-flask-app:latest
+📸 Screenshot:
 
 --------------------------------------------------
 
 ## 🟢 Part 7: Node.js Example
 
 docker build -t my-node-app .
+📸 Screenshot:
+
 docker run -d -p 3000:3000 --name node-container my-node-app
+📸 Screenshot:
+
 curl http://localhost:3000
+📸 Screenshot:
 
 --------------------------------------------------
 
 ## 🧪 Part 8: Practice
 
 docker build -t myapp:latest -t myapp:v2.0 -t username/myapp:production .
+📸 Screenshot:
+
 docker build --no-cache -t clean-app .
+📸 Screenshot:
 
 --------------------------------------------------
 
 ## 📌 Docker Cheatsheet
 
-docker build     -> Build image
-docker run       -> Run container
-docker ps        -> List containers
-docker images    -> List images
-docker tag       -> Tag image
-docker push      -> Push image
-docker pull      -> Pull image
-docker rm        -> Remove container
-docker rmi       -> Remove image
-docker logs      -> View logs
-docker exec      -> Run command
+docker build     -> Build image  
+docker run       -> Run container  
+docker ps        -> List containers  
+docker images    -> List images  
+docker tag       -> Tag image  
+docker push      -> Push image  
+docker pull      -> Pull image  
+docker rm        -> Remove container  
+docker rmi       -> Remove image  
+docker logs      -> View logs  
+docker exec      -> Run command  
 
 --------------------------------------------------
 
 ## 🔄 Workflow
 
 Development:
+
 docker build -t myapp .
+📸 Screenshot:
+
 docker run -p 8080:8080 myapp
+📸 Screenshot:
+
 docker tag myapp myapp:v1.0
+📸 Screenshot:
+
 docker push myapp:v1.0
+📸 Screenshot:
 
 Production:
+
 docker pull myapp:v1.0
+📸 Screenshot:
+
 docker run -d -p 80:8080 myapp:v1.0
+📸 Screenshot:
+
 docker logs -f myapp
+📸 Screenshot:
 
 --------------------------------------------------
 
@@ -179,5 +262,10 @@ docker logs -f myapp
 ## 🧹 Cleanup
 
 docker container prune
+📸 Screenshot:
+
 docker image prune
+📸 Screenshot:
+
 docker system prune -a
+📸 Screenshot:
