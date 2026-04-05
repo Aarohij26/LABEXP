@@ -123,35 +123,35 @@ docker build -t my-flask-app .
 ```bash
 docker images
 ```
-![List Images](./Images/7.png)
+![List Images](./Images/8.png)
 
 
 **Step-8: Add Tag in Image**
 ```bash
 docker build -t my-flask-app:1.0 .
 ```
-![Add Tag](./Images/8.png)
+![Add Tag](./Images/9.png)
 
 
 **Step-9:- Add multiple tags**
 ```bash
 docker build -t my-flask-app:latest -t my-flask-app:1.0 .
 ```
-![Multi Tag](./Images/9.png)
+![Multi Tag](./Images/10.png)
 
 
 **Step-10:- Add Tag with custom registry**
 ```bash
 docker build -t username/my-flask-app:1.0 .
 ```
-![Custom Registry](./Images/10.png)
+![Custom Registry](./Images/11.png)
 
 
 **Step-11:- Tag existing image**
 ```bash
 docker tag my-flask-app:latest my-flask-app:v1.0
 ```
-![Tagging Existing Image](./Images/11.png)
+![Tagging Existing Image](./Images/12.png)
 
 
 **Step-12: View Image Details**
