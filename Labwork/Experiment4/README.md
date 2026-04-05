@@ -102,6 +102,7 @@ tests/
 test_*.py
 ```
 ![Create dockerignore file](./Images/5.png)
+![Create dockerignore file](./Images/6.png)
 
 
 _Why **`.dockerignore`** is Important_
@@ -116,7 +117,7 @@ _Why **`.dockerignore`** is Important_
 ```bash
 docker build -t my-flask-app .
 ```
-![Build Image](./Images/6.png)
+![Build Image](./Images/7.png)
 
 **Step-7:- Verify Image**
 ```bash
