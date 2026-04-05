@@ -137,14 +137,14 @@ docker build -t my-flask-app:1.0 .
 ```bash
 docker build -t my-flask-app:latest -t my-flask-app:1.0 .
 ```
-![Multi Tag](./Images/10.png)
+![Multi Tag](./Images/100.png)
 
 
 **Step-10:- Add Tag with custom registry**
 ```bash
 docker build -t username/my-flask-app:1.0 .
 ```
-![Custom Registry](./Images/12.png)
+![Custom Registry](./Images/100.png)
 
 
 **Step-11:- Tag existing image**
@@ -172,7 +172,7 @@ docker history my-flask-app
 ```bash
 docker inspect my-flask-app
 ```
-![Inspect Image](./Images/14.png)
+![Inspect Image](./Images/13.png)
 
 
 
