@@ -1,98 +1,96 @@
-📂 Part 1: Docker Volumes (Data Persistence)
-Volumes are used to persist data beyond the lifecycle of a container.
+Gemini said
+To push this to GitHub using VS Code, you can copy the content below into a new file named README.md. I have formatted it to match the style of your reference while including placeholders for your screenshots.
 
-1. Named Volumes
+Experiment 3: Docker Deploy NGINX & Image Layer Comparison
+This lab explores deploying NGINX using three different approaches: the Official Image, an Ubuntu-based custom image, and an Alpine-based custom image, followed by a detailed comparison of image sizes and layers.
+
+🛠 Part 1: Deploy NGINX Using Official Image
+The recommended approach for standard production deployments.
+
+Step 1: Pull the Image
 Bash
-# Create a named volume
-docker volume create my-persistent-data
+docker pull nginx:latest
+[INSERT SCREENSHOT: Output of 'docker pull nginx:latest']
 
-# Run a container using the volume
-docker run -d -v my-persistent-data:/app/data --name storage-container nginx
-
-# Verify volume creation
-docker volume ls
-[INSERT SCREENSHOT: Output of 'docker volume ls']
-
-2. Bind Mounts
+Step 2: Run the Container
 Bash
-# Create a local directory and mount it
-mkdir ~/docker-lab
-docker run -d -v ~/docker-lab:/usr/share/nginx/html:ro --name web-bind nginx
-[INSERT SCREENSHOT: 'docker inspect web-bind' showing Source and Destination]
+docker run -d --name nginx-official -p 8080:80 nginx
+[INSERT SCREENSHOT: Output of 'docker run' showing the container ID]
 
-⚙️ Part 2: Environment Variables
-Configuring applications dynamically without modifying the image.
-
+Step 3: Verify
 Bash
-# Run a container with custom environment variables
-docker run -d \
-  --name config-app \
-  -e APP_COLOR=blue \
-  -e VERSION=1.0 \
-  alpine sleep 3600
+curl http://localhost:8080
+[INSERT SCREENSHOT: NGINX welcome page or terminal curl output]
 
-# Check variables inside the container
-docker exec config-app printenv
-[INSERT SCREENSHOT: Terminal output of 'printenv']
+🐧 Part 2: Custom NGINX Using Ubuntu Base Image
+Used when full OS utilities are required for debugging or complex dependencies.
 
-📊 Part 3: Docker Monitoring
-Real-time tracking of container performance and health.
+Step 1: Create Dockerfile
+Dockerfile
+FROM ubuntu:22.04
 
+RUN apt-get update && \
+    apt-get install -y nginx && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
+[INSERT SCREENSHOT: VS Code editor showing the Ubuntu Dockerfile]
+
+Step 2: Build and Run
 Bash
-# View real-time resource usage
-docker stats --no-stream
+docker build -t nginx-ubuntu .
+docker run -d --name nginx-ubuntu -p 8081:80 nginx-ubuntu
+[INSERT SCREENSHOT: Terminal output of the 'docker build' process]
 
-# View container logs with timestamps
-docker logs -t config-app
-[INSERT SCREENSHOT: The 'docker stats' dashboard]
+🏔 Part 3: Custom NGINX Using Alpine Base Image
+The preferred choice for microservices due to its minimal footprint.
 
-🌐 Part 4: Docker Networks
-Enabling secure communication via a private bridge network.
+Step 1: Create Dockerfile
+Dockerfile
+FROM alpine:latest
 
+RUN apk add --no-cache nginx
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
+[INSERT SCREENSHOT: VS Code editor showing the Alpine Dockerfile]
+
+Step 2: Build and Run
 Bash
-# Create a custom bridge network
-docker network create lab-network
+docker build -t nginx-alpine .
+docker run -d --name nginx-alpine -p 8082:80 nginx-alpine
+[INSERT SCREENSHOT: Terminal output of the 'docker build -t nginx-alpine' command]
 
-# Run containers on the same network for DNS resolution
-docker run -d --name db-server --network lab-network redis
-docker run -d --name app-server --network lab-network alpine sleep 3600
-
-# Test connectivity
-docker exec app-server ping -c 2 db-server
-[INSERT SCREENSHOT: Successful ping response between containers]
-
-🚀 Part 5: Full Stack Example
-Implementation of a Web App + Database + Cache architecture.
-
+📊 Part 4: Image Size and Layer Comparison
+Compare Sizes
 Bash
-# 1. Database with Volume
-docker run -d --name postgres-db --network lab-network -v pgdata:/var/lib/postgresql/data -e POSTGRES_PASSWORD=secret postgres:15
+docker images | grep nginx
+[INSERT SCREENSHOT: List of nginx, nginx-ubuntu, and nginx-alpine with their sizes]
 
-# 2. Redis Cache
-docker run -d --name redis-cache --network lab-network redis:7-alpine
-
-# 3. Web App
-docker run -d --name flask-web -p 5000:5000 --network lab-network -e DB_URL="postgres://postgres:secret@postgres-db:5432/db" nginx
-[INSERT SCREENSHOT: 'docker ps' showing all three services running]
-
-🧹 Cleanup
+Image Type	Size (Approx)	Efficiency
+nginx:latest	187 MB	Medium
+nginx-ubuntu	200+ MB	Large
+nginx-alpine	16 MB	Very Small
+Inspect History
 Bash
-# Reset the environment
-docker stop $(docker ps -aq)
-docker rm $(docker ps -aq)
-docker volume prune -f
-docker network prune -f
-[INSERT SCREENSHOT: Empty Docker environment]
+docker history nginx-alpine
+[INSERT SCREENSHOT: Output of 'docker history' showing image layers]
 
-🛠 How to Push to GitHub (VS Code)
-Initialize Git: Open the VS Code terminal and run git init.
+🧹 Cleanup & Git Push (VS Code Instructions)
+1. Cleanup Docker
+Bash
+docker stop nginx-official nginx-ubuntu nginx-alpine
+docker rm nginx-official nginx-ubuntu nginx-alpine
+2. Push to GitHub
+Open Source Control (Ctrl+Shift+G): Click the Initialize Repository button.
 
-Add Files: Run git add README.md (or use the Source Control icon on the left and click +).
+Stage Changes: Click the + icon next to README.md and your Dockerfiles.
 
-Commit: Type your message (e.g., "Add Experiment 5 README") and click Commit.
+Commit: Type Add Experiment 3 Documentation and click Commit.
 
-Connect to GitHub: ```bash
-git remote add origin 
-git branch -M main
+Publish: Click Publish Branch to sync with your GitHub repository.
 
-Push: Click Sync Changes in VS Code or run git push -u origin main.
