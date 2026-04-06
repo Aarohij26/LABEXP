@@ -12,14 +12,20 @@
 
 ```bash
 docker run -it --name test-container ubuntu /bin/bash
+```
+![Data Persistence](./Images/1.png)
 
+```bash
 echo "Hello World" > /data/message.txt
 cat /data/message.txt
 exit
+```
 
+```bash
 docker start test-container
 docker exec test-container cat /data/message.txt
 ```
+![Data Persistence](./Images/1)
 
 **Solution: Docker Volumes**
 
