@@ -1,96 +1,361 @@
-Gemini said
-To push this to GitHub using VS Code, you can copy the content below into a new file named README.md. I have formatted it to match the style of your reference while including placeholders for your screenshots.
+## Experiment 5:- Docker - Volumes, Environment Variables, Monitoring & Networks  
 
-Experiment 3: Docker Deploy NGINX & Image Layer Comparison
-This lab explores deploying NGINX using three different approaches: the Official Image, an Ubuntu-based custom image, and an Alpine-based custom image, followed by a detailed comparison of image sizes and layers.
+---
 
-🛠 Part 1: Deploy NGINX Using Official Image
-The recommended approach for standard production deployments.
+<h4 align="center"> Part 1: Docker Volumes - Persistent Data Storage </h4>
 
-Step 1: Pull the Image
-Bash
-docker pull nginx:latest
-[INSERT SCREENSHOT: Output of 'docker pull nginx:latest']
+---
 
-Step 2: Run the Container
-Bash
-docker run -d --name nginx-official -p 8080:80 nginx
-[INSERT SCREENSHOT: Output of 'docker run' showing the container ID]
+### Lab 1: Understanding Data Persistence  
 
-Step 3: Verify
-Bash
+**The Problem: Container Data is Ephemeral**
+
+```bash
+docker run -it --name test-container ubuntu /bin/bash
+
+echo "Hello World" > /data/message.txt
+cat /data/message.txt
+exit
+
+docker start test-container
+docker exec test-container cat /data/message.txt
+```
+
+**Solution: Docker Volumes**
+
+---
+
+### Lab 2: Volume Types  
+
+#### Anonymous Volume
+```bash
+docker run -d -v /app/data --name web1 nginx
+docker volume ls
+docker inspect web1 | grep -A 5 Mounts
+```
+
+#### Named Volume
+```bash
+docker volume create mydata
+docker run -d -v mydata:/app/data --name web2 nginx
+docker volume ls
+docker volume inspect mydata
+```
+
+#### Bind Mount
+```bash
+mkdir ~/myapp-data
+docker run -d -v ~/myapp-data:/app/data --name web3 nginx
+echo "From Host" > ~/myapp-data/host-file.txt
+docker exec web3 cat /app/data/host-file.txt
+```
+
+---
+
+### Lab 3: Practical Examples  
+
+#### MySQL Persistent Storage
+```bash
+docker run -d \
+  --name mysql-db \
+  -v mysql-data:/var/lib/mysql \
+  -e MYSQL_ROOT_PASSWORD=secret \
+  mysql:8.0
+
+docker stop mysql-db
+docker rm mysql-db
+
+docker run -d \
+  --name new-mysql \
+  -v mysql-data:/var/lib/mysql \
+  -e MYSQL_ROOT_PASSWORD=secret \
+  mysql:8.0
+```
+
+#### NGINX Config Mount
+```bash
+mkdir ~/nginx-config
+
+echo 'server {
+    listen 80;
+    location / {
+        return 200 "Hello from mounted config!";
+    }
+}' > ~/nginx-config/nginx.conf
+
+docker run -d \
+  --name nginx-custom \
+  -p 8080:80 \
+  -v ~/nginx-config/nginx.conf:/etc/nginx/conf.d/default.conf \
+  nginx
+
 curl http://localhost:8080
-[INSERT SCREENSHOT: NGINX welcome page or terminal curl output]
+```
 
-🐧 Part 2: Custom NGINX Using Ubuntu Base Image
-Used when full OS utilities are required for debugging or complex dependencies.
+---
 
-Step 1: Create Dockerfile
-Dockerfile
-FROM ubuntu:22.04
+### Lab 4: Volume Commands  
 
-RUN apt-get update && \
-    apt-get install -y nginx && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+```bash
+docker volume ls
+docker volume create app-volume
+docker volume inspect app-volume
+docker volume prune
+docker volume rm volume-name
+```
 
-EXPOSE 80
+---
 
-CMD ["nginx", "-g", "daemon off;"]
-[INSERT SCREENSHOT: VS Code editor showing the Ubuntu Dockerfile]
+<h4 align="center"> Part 2: Environment Variables </h4>
 
-Step 2: Build and Run
-Bash
-docker build -t nginx-ubuntu .
-docker run -d --name nginx-ubuntu -p 8081:80 nginx-ubuntu
-[INSERT SCREENSHOT: Terminal output of the 'docker build' process]
+---
 
-🏔 Part 3: Custom NGINX Using Alpine Base Image
-The preferred choice for microservices due to its minimal footprint.
+### Setting Variables  
 
-Step 1: Create Dockerfile
-Dockerfile
-FROM alpine:latest
+```bash
+docker run -d \
+  --name app1 \
+  -e DATABASE_URL="postgres://user:pass@db:5432/mydb" \
+  -e DEBUG="true" \
+  my-node-app
+```
 
-RUN apk add --no-cache nginx
+### Using .env File  
 
-EXPOSE 80
+```bash
+echo "DATABASE_HOST=localhost" > .env
+echo "API_KEY=secret123" >> .env
 
-CMD ["nginx", "-g", "daemon off;"]
-[INSERT SCREENSHOT: VS Code editor showing the Alpine Dockerfile]
+docker run -d --env-file .env my-app
+```
 
-Step 2: Build and Run
-Bash
-docker build -t nginx-alpine .
-docker run -d --name nginx-alpine -p 8082:80 nginx-alpine
-[INSERT SCREENSHOT: Terminal output of the 'docker build -t nginx-alpine' command]
+### Dockerfile Example  
 
-📊 Part 4: Image Size and Layer Comparison
-Compare Sizes
-Bash
-docker images | grep nginx
-[INSERT SCREENSHOT: List of nginx, nginx-ubuntu, and nginx-alpine with their sizes]
+```Dockerfile
+ENV NODE_ENV=production
+ENV PORT=3000
+```
 
-Image Type	Size (Approx)	Efficiency
-nginx:latest	187 MB	Medium
-nginx-ubuntu	200+ MB	Large
-nginx-alpine	16 MB	Very Small
-Inspect History
-Bash
-docker history nginx-alpine
-[INSERT SCREENSHOT: Output of 'docker history' showing image layers]
+---
 
-🧹 Cleanup & Git Push (VS Code Instructions)
-1. Cleanup Docker
-Bash
-docker stop nginx-official nginx-ubuntu nginx-alpine
-docker rm nginx-official nginx-ubuntu nginx-alpine
-2. Push to GitHub
-Open Source Control (Ctrl+Shift+G): Click the Initialize Repository button.
+### Flask Example  
 
-Stage Changes: Click the + icon next to README.md and your Dockerfiles.
+```python
+import os
+from flask import Flask
 
-Commit: Type Add Experiment 3 Documentation and click Commit.
+app = Flask(__name__)
 
-Publish: Click Publish Branch to sync with your GitHub repository.
+@app.route('/config')
+def config():
+    return {
+        "db": os.environ.get("DATABASE_HOST"),
+        "debug": os.environ.get("DEBUG")
+    }
 
+app.run(host="0.0.0.0", port=5000)
+```
+
+---
+
+### Test Variables  
+
+```bash
+docker run -d \
+  --name flask-app \
+  -p 5000:5000 \
+  -e DEBUG=true \
+  flask-app
+
+docker exec flask-app env
+curl http://localhost:5000/config
+```
+
+---
+
+<h4 align="center"> Part 3: Docker Monitoring </h4>
+
+---
+
+```bash
+docker stats
+docker stats --no-stream
+
+docker top container-name
+
+docker logs -f container-name
+
+docker inspect container-name
+
+docker events
+```
+
+---
+
+### Simple Monitoring Script  
+
+```bash
+#!/bin/bash
+docker ps
+docker stats --no-stream
+docker system df
+```
+
+---
+
+<h4 align="center"> Part 4: Docker Networks </h4>
+
+---
+
+### List Networks  
+
+```bash
+docker network ls
+```
+
+### Bridge Network  
+
+```bash
+docker network create my-network
+
+docker run -d --name web1 --network my-network nginx
+docker run -d --name web2 --network my-network nginx
+
+docker exec web1 curl http://web2
+```
+
+### Host Network  
+
+```bash
+docker run -d --network host nginx
+```
+
+### None Network  
+
+```bash
+docker run -d --network none alpine sleep 3600
+```
+
+---
+
+### Network Commands  
+
+```bash
+docker network create app-network
+docker network connect app-network container-name
+docker network disconnect app-network container-name
+docker network rm app-network
+```
+
+---
+
+### Multi-Container Example  
+
+```bash
+docker network create app-network
+
+docker run -d \
+  --name postgres-db \
+  --network app-network \
+  -e POSTGRES_PASSWORD=secret \
+  postgres:15
+
+docker run -d \
+  --name web-app \
+  --network app-network \
+  -p 8080:3000 \
+  -e DATABASE_HOST="postgres-db" \
+  node-app
+```
+
+---
+
+### Debugging  
+
+```bash
+docker network inspect bridge
+docker exec container-name ping google.com
+docker port container-name
+```
+
+---
+
+<h4 align="center"> Part 5: Real-World Example </h4>
+
+---
+
+```bash
+docker network create myapp-network
+
+docker run -d \
+  --name postgres \
+  --network myapp-network \
+  -e POSTGRES_PASSWORD=pass \
+  postgres:15
+
+docker run -d \
+  --name redis \
+  --network myapp-network \
+  redis:7-alpine
+
+docker run -d \
+  --name flask-app \
+  --network myapp-network \
+  -p 5000:5000 \
+  flask-app:latest
+```
+
+---
+
+<h4 align="center"> Cheatsheet </h4>
+
+---
+
+```bash
+docker volume create <name>
+docker run -v <volume>:/path
+
+docker run -e VAR=value
+
+docker stats
+docker logs -f <container>
+
+docker network create <name>
+```
+
+---
+
+<h4 align="center"> Practice </h4>
+
+---
+
+- Create DB with volume  
+- Multi-service setup  
+- Analyze logs  
+- Network isolation  
+
+---
+
+<h4 align="center"> Cleanup </h4>
+
+---
+
+```bash
+docker stop $(docker ps -aq)
+docker rm $(docker ps -aq)
+docker volume prune -f
+docker network prune -f
+docker image prune -f
+```
+
+---
+
+<h4 align="center"> Key Takeaways </h4>
+
+---
+
+- Volumes store persistent data  
+- Env variables control config  
+- Monitoring helps debugging  
+- Networks connect containers  
+- Use .env for security  
