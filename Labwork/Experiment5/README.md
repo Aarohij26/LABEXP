@@ -71,13 +71,13 @@ docker run -d \
   -e MYSQL_ROOT_PASSWORD=secret \
   mysql:8.0
 ```
-![Bind mount](./Images/6.png)
+![Bind mount](./Images/7.png)
 
 ```bash
 docker stop mysql-db
 docker rm mysql-db
 ```
-![Bind mount](./Images/6.png)
+![Bind mount](./Images/8.png)
 
 ```bash
 docker run -d \
@@ -86,7 +86,7 @@ docker run -d \
   -e MYSQL_ROOT_PASSWORD=secret \
   mysql:8.0
 ```
-![Bind mount](./Images/6.png)
+![Bind mount](./Images/9.png)
 
 #### NGINX Config Mount
 ```bash
