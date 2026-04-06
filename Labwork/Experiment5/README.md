@@ -20,12 +20,13 @@ echo "Hello World" > /data/message.txt
 cat /data/message.txt
 exit
 ```
+![Data Persistence](./Images/2.png)
 
 ```bash
 docker start test-container
 docker exec test-container cat /data/message.txt
 ```
-![Data Persistence](./Images/1)
+![Data Persistence](./Images/3.png)
 
 **Solution: Docker Volumes**
 
