@@ -91,23 +91,29 @@ docker run -d \
 #### NGINX Config Mount
 ```bash
 mkdir ~/nginx-config
-
+```
+![Bind mount](./Images/10.png)
+```bash
 echo 'server {
     listen 80;
     location / {
         return 200 "Hello from mounted config!";
     }
 }' > ~/nginx-config/nginx.conf
-
+```
+![Bind mount](./Images/11.png)
+```bash
 docker run -d \
   --name nginx-custom \
   -p 8080:80 \
   -v ~/nginx-config/nginx.conf:/etc/nginx/conf.d/default.conf \
   nginx
-
+```
+![Bind mount](./Images/12.png)
+```bash
 curl http://localhost:8080
 ```
-
+![Bind mount](./Images/13.png)
 ---
 
 ### Lab 4: Volume Commands  
