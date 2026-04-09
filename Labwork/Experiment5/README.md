@@ -121,22 +121,27 @@ curl http://localhost:8080
 ```bash
 docker volume ls
 ```
+![Bind mount](./Images/14.png)
 ```bash
 docker volume create app-volume
 ```
+![Bind mount](./Images/15.png)
 ```bash
 docker volume inspect app-volume
 ```
+![Bind mount](./Images/16.png)
 ```bash
 docker volume prune
 ```
+![Bind mount](./Images/17.png)
 ```bash
 docker volume rm volume-name
 ```
+![Bind mount](./Images/18.png)
 ```bash
 docker cp local-file.txt container-name:/path/in/volume
 ```
-
+![Bind mount](./Images/19.png)
 ---
 
 <h4 align="center"> Part 2: Environment Variables </h4>
@@ -158,7 +163,9 @@ docker run -d \
 ```bash
 echo "DATABASE_HOST=localhost" > .env
 echo "API_KEY=secret123" >> .env
+```
 
+```bash
 docker run -d --env-file .env my-app
 ```
 
