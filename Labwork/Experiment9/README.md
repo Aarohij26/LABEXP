@@ -70,16 +70,11 @@ sudo apt install ansible -y
 ```
 ![Version](./4.png)
 
-```bash
-ansible --version
-```
-![Version](./5.png)
-
 ## Test Installation
 ```bash
 ansible localhost -m ping
 ```
-![Version](./6.png)
+![Version](./5.png)
 
 Expected Output:
 "ping": "pong"
