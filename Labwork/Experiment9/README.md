@@ -60,18 +60,26 @@ ansible --version
 ![Version](./2.png)
 
 ## Install via apt
+```bash
 sudo apt update -y
-📸 Add Screenshot Here
+```
+![Version](./3.png)
 
+```bash
 sudo apt install ansible -y
-📸 Add Screenshot Here
+```
+![Version](./4.png)
 
+```bash
 ansible --version
-📸 Add Screenshot Here
+```
+![Version](./5.png)
 
 ## Test Installation
+```bash
 ansible localhost -m ping
-📸 Add Screenshot Here
+```
+![Version](./6.png)
 
 Expected Output:
 "ping": "pong"
@@ -81,17 +89,21 @@ Expected Output:
 # 🐳 Docker + SSH Setup
 
 ## Generate SSH Key
+```bash
 ssh-keygen -t rsa -b 4096
-📸 Add Screenshot Here
+```
+![Version](./7.png)
 
+```bash
 cp ~/.ssh/id_rsa.pub .
 cp ~/.ssh/id_rsa .
-📸 Add Screenshot Here
+```
+![Version](./8.png)
 
 ---
 
 ## Create Dockerfile
-
+```bash
 FROM ubuntu
 
 RUN apt update -y
@@ -116,56 +128,72 @@ RUN sed -i 's@session\\s*required\\s*pam_loginuid.so@session optional pam_loginu
 EXPOSE 22
 
 CMD ["/usr/sbin/sshd", "-D"]
-
-📸 Add Screenshot Here
+```
+![Version](./9.png)
 
 ---
 
 ## Build Image
+```bash
 docker build -t ubuntu-server .
-📸 Add Screenshot Here
+```
+![Version](./10.png)
 
 ## Run Container
+```bash
 docker run -d -p 2222:22 --name ssh-test-server ubuntu-server
-📸 Add Screenshot Here
+```
+![Version](./11.png)
 
 ## Get Container IP
+```bash
 docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ssh-test-server
-📸 Add Screenshot Here
+```
+![Version](./12.png)
 
 ---
 
 ## Test SSH
 
+```bash
 Password:
 ssh root@localhost -p 2222
-📸 Add Screenshot Here
+```
+![Version](./13.png)
 
+```bash
 Key-based:
 ssh -i ~/.ssh/id_rsa root@localhost -p 2222
-📸 Add Screenshot Here
+```
+![Version](./14.png)
 
 ---
 
 # ⚡ Ansible with Docker
 
 ## Run Multiple Servers
+```bash
 for i in {1..4}; do
   docker run -d -p 220${i}:22 --name server${i} ubuntu-server
 done
-📸 Add Screenshot Here
+```
+![Version](./15.png)
 
 ---
 
 ## Create Inventory
+```bash
 echo "[servers]" > inventory.ini
-📸 Add Screenshot Here
+```
+![Version](./16.png)
 
+```bash
 for i in {1..4}; do
   docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' server${i} >> inventory.ini
 done
-📸 Add Screenshot Here
-
+```
+![Version](./17.png)
+```bash
 cat << EOF >> inventory.ini
 
 [servers:vars]
@@ -173,19 +201,21 @@ ansible_user=root
 ansible_ssh_private_key_file=~/.ssh/id_rsa
 ansible_python_interpreter=/usr/bin/python3
 EOF
-
-📸 Add Screenshot Here
+```
+![Version](./18.png)
 
 ---
 
 ## Test Connectivity
+```bash
 ansible all -i inventory.ini -m ping
-📸 Add Screenshot Here
+```
+![Version](./19.png)
 
 ---
 
 ## Create Playbook (playbook1.yml)
-
+```bash
 ---
 - name: Update and configure servers
   hosts: all
@@ -206,26 +236,32 @@ ansible all -i inventory.ini -m ping
       copy:
         dest: /root/ansible_test.txt
         content: "Configured by Ansible on {{ inventory_hostname }}"
-
-📸 Add Screenshot Here
+```
+![Version](./20.png)
 
 ---
 
 ## Run Playbook
+```bash
 ansible-playbook -i inventory.ini playbook1.yml
-📸 Add Screenshot Here
+```
+![Version](./21.png)
 
 ---
 
 ## Verify Output
+```bash
 ansible all -i inventory.ini -m command -a "cat /root/ansible_test.txt"
-📸 Add Screenshot Here
+```
+![Version](./22.png)
 
 ---
 
 ## Cleanup
+```bash
 for i in {1..4}; do docker rm -f server${i}; done
-📸 Add Screenshot Here
+```
+![Version](./23.png)
 
 ---
 
