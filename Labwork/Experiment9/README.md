@@ -125,6 +125,7 @@ EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
 ```
 ![Version](./8.png)
+![Version](./9.png)
 
 ---
 
@@ -132,13 +133,13 @@ CMD ["/usr/sbin/sshd", "-D"]
 ```bash
 docker build -t ubuntu-server .
 ```
-![Version](./9.png)
+![Version](./10.png)
 
 ## Run Container
 ```bash
 docker run -d -p 2222:22 --name ssh-test-server ubuntu-server
 ```
-![Version](./10.png)
+![Version](./11.png)
 
 ## Get Container IP
 ```bash
