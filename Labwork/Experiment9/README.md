@@ -54,7 +54,7 @@ pip install ansible
 ![Install](./1.png)
 
 ansible --version
-📸 Add Screenshot Here
+![Version](./2.png)
 
 ## Install via apt
 sudo apt update -y
