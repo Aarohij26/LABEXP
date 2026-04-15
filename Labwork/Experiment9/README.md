@@ -155,13 +155,13 @@ docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ssh-
 Password:
 ssh root@localhost -p 2222
 ```
-![Version](./13.png)
+![Version](./14.png)
 
 ```bash
 Key-based:
 ssh -i ~/.ssh/id_rsa root@localhost -p 2222
 ```
-![Version](./14.png)
+![Version](./15.png)
 
 ---
 
@@ -173,7 +173,7 @@ for i in {1..4}; do
   docker run -d -p 220${i}:22 --name server${i} ubuntu-server
 done
 ```
-![Version](./15.png)
+![Version](./16.png)
 
 ---
 
