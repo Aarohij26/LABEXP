@@ -85,6 +85,7 @@ Stop:
 docker stop lab-nginx
 docker rm lab-nginx
 ```
+![Version](./Images/5.png)
 
 ---
 
