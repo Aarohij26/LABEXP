@@ -29,7 +29,7 @@ docker run -d \
 
 ## Docker Compose (Declarative)
 
-yaml
+```yaml
 version: '3.8'
 
 services:
@@ -40,20 +40,21 @@ services:
       - "8081:80"
     volumes:
       - ./html:/usr/share/nginx/html
-
+```
 
 Run:
 
 ```bash
 docker compose up -d
 ```
+![Version](./Images/2.png)
 
 Stop:
 
 ```bash
 docker compose down
 ```
-
+![Version](./Images/3.png)
 ---
 
 # 🔹 PART B – PRACTICAL TASKS
@@ -71,7 +72,7 @@ docker run -d \
 
 docker ps
 ```
-
+![Version](./Images/4.png)
 Access:
 
 ```
