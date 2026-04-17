@@ -175,14 +175,16 @@ services:
 volumes:
   mysql_data:
 ```
-
+![Version](./Images/12.png)
+![Version](./Images/13.png)
 Run:
 
 ```bash
 docker compose up -d
 docker compose down -v
 ```
-
+![Version](./Images/14.png)
+![Version](./Images/15.png)
 ---
 
 # 🔹 PART C – CONVERSION TASKS
