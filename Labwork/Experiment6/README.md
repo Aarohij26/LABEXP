@@ -123,14 +123,20 @@ docker compose down
 
 ```bash
 docker network create wp-net
+```
+![Version](./Images/9.png)
 
+```bash
 docker run -d \
   --name mysql \
   --network wp-net \
   -e MYSQL_ROOT_PASSWORD=secret \
   -e MYSQL_DATABASE=wordpress \
   mysql:5.7
+```
+![Version](./Images/10.png)
 
+```bash
 docker run -d \
   --name wordpress \
   --network wp-net \
@@ -139,7 +145,7 @@ docker run -d \
   -e WORDPRESS_DB_PASSWORD=secret \
   wordpress:latest
 ```
-
+![Version](./Images/11.png)
 ---
 
 ### Docker Compose Approach
