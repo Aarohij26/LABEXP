@@ -187,6 +187,7 @@ docker run -d \
 
 ---
 ![Version](./Images/14.png)
+![Version](./Images/15.png)
 
 ## ⚙️ Step 6: Run Code Analysis
 
@@ -198,7 +199,7 @@ docker exec -e SONAR_TOKEN="your-token" \
   -Dsonar.projectKey=sample-java-app \
   -Dsonar.sources=/usr/src/src
 ```
-
+![Version](./Images/16.png)
 ---
 
 ## 📊 Step 7: View Results
@@ -208,6 +209,7 @@ Open:
 ```
 http://localhost:9000/dashboard?id=sample-java-app
 ```
+![Version](./Images/17.png)
 
 ### Observed Issues:
 
@@ -228,60 +230,6 @@ http://localhost:9000/dashboard?id=sample-java-app
 * Duplications: 2 blocks
 * Test Coverage: 0%
 * Technical Debt: ~2 hours
-
----
-
-## 🔧 Step 8: Jenkins Integration
-
-### Jenkinsfile
-
-```groovy
-pipeline {
-    agent any
-    
-    environment {
-        SONAR_HOST_URL = 'http://sonarqube:9000'
-        SONAR_TOKEN = credentials('sonar-token')
-    }
-    
-    stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-        
-        stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh 'mvn clean verify sonar:sonar'
-                }
-            }
-        }
-        
-        stage('Quality Gate') {
-            steps {
-                timeout(time: 1, unit: 'HOURS') {
-                    waitForQualityGate abortPipeline: true
-                }
-            }
-        }
-        
-        stage('Build') {
-            steps {
-                sh 'mvn package'
-            }
-        }
-        
-        stage('Deploy') {
-            steps {
-                sh 'docker build -t sample-app .'
-                sh 'docker run -d -p 8080:8080 sample-app'
-            }
-        }
-    }
-}
-```
 
 ---
 
