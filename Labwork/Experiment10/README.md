@@ -133,12 +133,15 @@ docker compose up -d
 ```bash
 mkdir -p sample-java-app/src/main/java/com/example
 ```
+![Version](./Images/8.png)
 
 ### Add Java Code (with issues)
 
 (Create `Calculator.java` as provided in experiment)
 
 ---
+![Version](./Images/9.png)
+![Version](./Images/10.png)
 
 ## 📦 Step 3: Maven Configuration
 
@@ -152,6 +155,9 @@ mkdir -p sample-java-app/src/main/java/com/example
 cd sample-java-app
 mvn clean install
 ```
+![Version](./Images/11.png)
+![Version](./Images/12.png)
+
 
 ---
 
@@ -167,6 +173,7 @@ docker run -d \
   sonarsource/sonar-scanner-cli \
   sleep infinity
 ```
+![Version](./Images/13.png)
 
 ---
 
